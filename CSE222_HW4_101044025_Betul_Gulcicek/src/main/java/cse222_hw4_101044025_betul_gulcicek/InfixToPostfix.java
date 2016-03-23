@@ -5,6 +5,7 @@
  */
 package cse222_hw4_101044025_betul_gulcicek;
 
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -30,17 +31,18 @@ public class InfixToPostfix {
     /** The operator stack */
     private Stack<Character> operatorStack;
     /** The operators */
-    private static final String OPERATORS = "+-*/";
+    private static final String OPERATORS = "=+-*/";
     /** The precedence of the operators, matches order in OPERATORS. */
-    private static final int[] PRECEDENCE = {1, 1, 2, 2};
+    private static final int[] PRECEDENCE = {0, 1, 1, 2, 2};
     /** The postfix string */
     private StringBuilder postfix;
-
+    
+    
     /** Convert a string from infix to postfix.
     @param infix The infix expression
     @throws SyntaxErrorException
      */
-    public String convert(String infix) throws SyntaxErrorException {
+    public String convert(String infix) throws SyntaxErrorException, IOException {
         operatorStack = new Stack<Character>();
         postfix = new StringBuilder();
         StringTokenizer infixTokens = new StringTokenizer(infix);
@@ -70,7 +72,9 @@ public class InfixToPostfix {
                 postfix.append(op);
                 postfix.append(' ');
                
-            }System.out.println(postfix.toString());                      /////////////////////////
+            }///////////////////System.out.println(postfix.toString());                      /////////////////////////
+            
+           
             // assert: Stack is empty, return result.
             return postfix.toString();
         } catch (EmptyStackException ex) {
@@ -128,7 +132,5 @@ public class InfixToPostfix {
     private int precedence(char op) {
         return PRECEDENCE[OPERATORS.indexOf(op)];
     }
-    
-   // public printStack()
-    //         System.out.println(operatorStack.get(i));
+   
 }

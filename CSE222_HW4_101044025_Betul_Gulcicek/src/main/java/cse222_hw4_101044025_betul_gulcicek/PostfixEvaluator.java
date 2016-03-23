@@ -25,13 +25,16 @@ public class PostfixEvaluator {
         }
     }
 
+    /**
+     * Constructor
+     */
     PostfixEvaluator() {
     }
     // Constant
     /**
      * A list of operators.
      */
-    private static final String OPERATORS = "+-*/";
+    private static final String OPERATORS = "=+-*/";
     // Data Field
     /**
      * The operand stack.
@@ -66,6 +69,9 @@ public class PostfixEvaluator {
             case '*':
                 result = lhs * rhs;
                 break;
+            case '=':
+                lhs = rhs;
+                result = lhs;
 
         }
         return result;
@@ -113,6 +119,7 @@ public class PostfixEvaluator {
                     operandStackInt.push(result);
                 } else {
                     // Invalid character.
+                    //System.out.println(",,,, "+ operandStackInt.peek());
                     throw new SyntaxErrorException("Invalid character encountered");
                 }
                // System.out.printf(nextToken, " ");            /////////////////////////////////////////////////////////
